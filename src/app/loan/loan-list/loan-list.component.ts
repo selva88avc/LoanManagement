@@ -3,8 +3,10 @@ import { Loan } from '../model/loan';
 import { Lien } from '../model/lien';
 import { Person } from '../model/person';
 import { Address } from '../model/models';
-import { GlobalConstant } from '../../common/global.constant';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { LoanService } from '../../services/loan.service';
+import { PersistentService } from '../../services/persistent.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-loan-list',
@@ -12,20 +14,27 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./loan-list.component.css']
 })
 export class LoanListComponent implements OnInit {
-  loans: Loan[] = GlobalConstant.loans;
-  loan: Loan;
+  loans: Loan[];
+  //loan: Loan;
   isListOnly = true;
-  constructor( ) {
+  constructor(private loanService: LoanService, private persistentService: PersistentService, private authenticationService: AuthenticationService ) {
+    this.loans = persistentService.loanValues;
+    loanService.isUpdated.subscribe(
+      (status: boolean) => {if(status){this.loans = persistentService.loanValues;this.dataSource = new MatTableDataSource<Loan>(persistentService.loanValues);this.isListOnly = true;}} 
+  )
   }
   dataSource: MatTableDataSource<Loan>;
 
-  getLoan(loanNumber) { 
-    return (this.loans.filter(loan => loan.loanNumber== loanNumber))[0]; 
-  } 
+  checkAdmin(){
+    if(this.authenticationService.currentUserValue)
+    this.isAdmin =  this.authenticationService.currentUserValue.role == "admin";
+  }
+  
   
   edit(loanNumber: string){
     this.isListOnly = false;
-    this.loan = this.getLoan(loanNumber);
+    this.loanService.loanToBeEdited.emit(loanNumber);
+    //this.loan = this.getLoan(loanNumber);
   }
 
  applyFilter(filterValue: string) {
@@ -34,9 +43,13 @@ export class LoanListComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
   ngOnInit() {
-    this.dataSource = new MatTableDataSource<Loan>(this.loans);
+    this.checkAdmin();
+    console.log("yes");
+    this.dataSource = new MatTableDataSource<Loan>(this.persistentService.loanValues);
     this.dataSource.filterPredicate = (data: Loan, filter: string) => {
-      return data.loanNumber.includes(filter)||data.borrower.firstName.includes(filter)||data.borrower.lastName.includes(filter)
+      console.log(data.borrower.firstName+"=="+data.borrower.lastName+"--"+filter);
+      console.log((data.loanNumber.includes(filter)||data.borrower.firstName.includes(filter)||data.borrower.lastName.includes(filter)));
+      return (data.loanNumber.includes(filter)||data.borrower.firstName.toLowerCase().includes(filter)||data.borrower.lastName.toLowerCase().includes(filter));
      };
     }
 

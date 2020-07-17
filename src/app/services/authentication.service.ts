@@ -22,7 +22,11 @@ export class AuthenticationService {
     login(username, password): Observable<User> {
         let user :User;
         if(username == 'selva' && password == 'kumar'){
-            user = new User(1234, 'selva', 'kumar', 'selva', 'kumar', 'iuyiuyu-8809809')
+            user = new User(1234, 'selva', 'kumar', 'selva', 'kumar', 'iuyiuyu-8809809', 'admin')
+            this.currentUserSubject.next(user);
+        }
+        if(username == 'muthu' && password == 'kumar'){
+            user = new User(1234, 'selva', 'kumar', 'selva', 'kumar', 'iuyiuyu-8809809', 'normal')
             this.currentUserSubject.next(user);
         }
         return new Observable((observer) => {

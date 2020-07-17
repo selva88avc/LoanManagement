@@ -3,12 +3,15 @@
         <button class="btn btn-success">New Loan</button>
     </div>
 </div>-->
+<app-home></app-home>
+<div class="row">
 <app-loan-item [hidden]="isListOnly"></app-loan-item>
-
+</div>
+<div class="row">
 <mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="loanNumber">
       <mat-header-cell *matHeaderCellDef> Loan Number </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.loanNumber}} </mat-cell>
+      <mat-cell #loanNumber *matCellDef="let row"> {{row.loanNumber}} </mat-cell>
     </ng-container>
   
     <ng-container matColumnDef="status">
@@ -33,30 +36,37 @@
     <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
     <mat-cell *matCellDef="let row"> {{row.borrower.lastName}} </mat-cell>
 </ng-container>
-    <ng-container matColumnDef="edit">
+    <ng-container matColumnDef="edit" *ngIf="isAdmin">
       <mat-header-cell *matHeaderCellDef> Edit</mat-header-cell>
       <mat-cell *matCellDef="let row" >
-        <button mat-button >Edit</button>
+        <button (click)="edit(row.loanNumber)"  mat-button >Edit</button>
       </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="remove">
+    <ng-container matColumnDef="remove" *ngIf="isAdmin">
       <mat-header-cell *matHeaderCellDef> Remove </mat-header-cell>
       <mat-cell *matCellDef="let row" >
         <button mat-button >Remove</button>
       </mat-cell>
     </ng-container>
-
-    <!-- Header and Row Declarations -->
+    <div *ngIf="isAdmin">
     <mat-header-row *matHeaderRowDef="['loanNumber', 'status', 'loanAmount', 'loanTerm', 'firstName', 'lastName', 'edit', 'remove']"></mat-header-row>
     <mat-row *matRowDef="let row; columns: ['loanNumber', 'status', 'loanAmount', 'loanTerm', 'firstName', 'lastName', 'edit', 'remove']"></mat-row>
+</div>
+<div *ngIf="!isAdmin">
+    <!-- Header and Row Declarations -->
+    <mat-header-row *matHeaderRowDef="['loanNumber', 'status', 'loanAmount', 'loanTerm', 'firstName', 'lastName']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['loanNumber', 'status', 'loanAmount', 'loanTerm', 'firstName', 'lastName']"></mat-row>
+</div>
   </mat-table>
   <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter(Loan Number/Name)">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search(Loan Number/Name)">
   </mat-form-field>
-<div class="row">
+<!-- <div class="row">
     <div class="col-xs-12">
         <a href="#" class="list-group-item clearfix">
             
         </a>
     </div>
+</div> -->
 </div>
+

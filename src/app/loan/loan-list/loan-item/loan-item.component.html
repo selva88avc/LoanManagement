@@ -1,23 +1,119 @@
-<h2>Loan</h2>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Username is required</div>
-        </div>
+<div class="col-md-10">
+        <form [formGroup]="loanForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="loanNumber" class="control-label">Loan Number</label>
+                        <input type="text" formControlName="loanNumber"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.loanNumber.errors }" />
+                        <div *ngIf="submitted && f.loanNumber.errors" class="invalid-feedback">
+                            <div *ngIf="f.loanNumber.errors.required">Loan Number is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="loanAmount" class="control-label">Loan Amount</label>
+                        <input type="text" formControlName="loanAmount"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.loanAmount.errors }" />
+                        <div *ngIf="submitted && f.loanAmount.errors" class="invalid-feedback">
+                            <div *ngIf="f.loanAmount.errors.required">Loan Amount is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="loanTerm">Loan Term</label>
+                        <select class="custom-select form-control" formControlName="loanTerm" maxlength="100" [ngClass]="{ 'is-invalid': submitted && f.loanTerm.errors }" >
+                            <option value="" disabled>Choose Term</option>
+                            <option>Short Term</option>
+                            <option>Long Term</option>
+                         </select>
+                        <div *ngIf="submitted && f.loanTerm.errors" class="invalid-feedback">
+                            <div *ngIf="f.loanTerm.errors.required">Loan Term is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="firstName" class="control-label">First Name</label>
+                        <input type="text" formControlName="firstName"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="lastName" class="control-label">Last Name</label>
+                        <input type="text" formControlName="lastName"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="loanManagementFees">Loan Management Fees</label>
+                        <input type="text" formControlName="loanManagementFees" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.loanManagementFees.errors }" />
+                        <div *ngIf="submitted && f.loanManagementFees.errors" class="invalid-feedback">
+                            <div *ngIf="f.loanManagementFees.errors.required">Loan Management Fees is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="originationDate">Orgination Date</label>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input matInput [matDatepicker]="picker" formControlName="originationDate" class="form-control col-md-5" [ngClass]="{ 'is-invalid': submitted && f.originationDate.errors }">
+                            </div>                    
+                            <div class="col-md-1"> 
+                                <mat-datepicker-toggle  matSuffix [for]="picker" ></mat-datepicker-toggle>
+                                <mat-datepicker  #picker></mat-datepicker>
+                            </div>
+                        </div>
+                        <div *ngIf="submitted && f.originationDate.errors" class="invalid-feedback">
+                            <div *ngIf="f.originationDate.errors.required">Origination Date is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="originationAccount" class="control-label">Origination Account</label>
+                        <input type="text" formControlName="originationAccount"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.originationAccount.errors }" />
+                        <div *ngIf="submitted && f.originationAccount.errors" class="invalid-feedback">
+                            <div *ngIf="f.originationAccount.errors.required">Origination Account is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="status">Loan Status</label>
+                        <select class="custom-select form-control" formControlName="status" maxlength="100" [ngClass]="{ 'is-invalid': submitted && f.status.errors }" >
+                            <option value="" disabled>Choose Status</option>
+                            <option>INITIATED</option>
+                            <option>APPROVED</option>
+                            <option>DISBURSED</option>
+                            <option>CLOSED</option>
+                         </select>
+                        <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                            <div *ngIf="f.status.errors.required">Loan Status is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button  class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Update Loan
+                </button>
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Password is required</div>
-        </div>
-    </div>
-    <div class="form-group">
-        <button [disabled]="loading" class="btn btn-primary">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-            Login
-        </button>
-    </div>
-</form>

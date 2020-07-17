@@ -14,8 +14,11 @@ export class AppComponent {
     private authenticationService: AuthenticationService
 ) {
 }
-logout() {
-  this.authenticationService.logout();
+// logout() {
+//   this.authenticationService.logout();
 
-}
+// }
+// isAdmin(){
+//   this.authenticationService.currentUserValue.
+// }
 }

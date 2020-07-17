@@ -60,7 +60,7 @@ export class LoanDetailComponent implements OnInit {
       }
 
       this.loading = true;
-      this.loanService.saveLoan(this.f.loanAmount.value, this.f.loanTerm.value, this.f.loanManagementFees.value, this.f.originationDate.value,this.f.originationAccount.value, this.f.originationAccount.value, this.f.firstName.value, this.f.lastName.value)
+      this.loanService.saveLoan(this.f.loanAmount.value, this.f.loanTerm.value, this.f.loanManagementFees.value, this.f.originationDate.value,this.f.originationAccount.value, this.f.status.value, this.f.firstName.value, this.f.lastName.value)
           .pipe(first())
           .subscribe(
               data => {

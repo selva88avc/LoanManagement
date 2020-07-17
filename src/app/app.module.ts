@@ -18,6 +18,7 @@ import { LoanComponent } from './loan/loan.component';
 import { LoginComponent } from './login/login.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -29,7 +30,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     LoanDetailComponent,
     HeaderComponent,
     LoanListComponent,
-    LoanItemComponent
+    LoanItemComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
