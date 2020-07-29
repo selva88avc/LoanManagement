@@ -10,28 +10,29 @@
  * Do not edit the class manually.
  */
 import { Lien } from './lien';
-import { Person } from './person';
+import { User } from './user';
 
 
-export class Loan { 
-   public loanNumber: string;
-   public loanAmount: number;
-   public loanManagementFees: number;
-   public loanTerm: string;
-   public originationDate: Date;
-   public originationAccount: string;
-   public lien: Lien;
-   public borrower:Person
-   public status: string;
-   constructor (loanNumber: string, loanAmount: number, loanManagementFees: number, loanTerm: string, originationDate: Date, originationAccount: string, lien: Lien, borrower:Person, status: string) {
-       this.loanNumber = loanNumber;
-       this.loanAmount = loanAmount;
-       this.loanManagementFees = loanManagementFees;
-       this.loanTerm = loanTerm;
-       this.originationDate = originationDate;
-       this.originationAccount =originationAccount;
-       this.lien = lien;
-       this.borrower = borrower;
-       this.status = status;
-   }
+export class Loan {
+    public loanNumber: number;
+    public loanAmount: number;
+    public loanManagementFees: number;
+    public loanTerm: string;
+    public originationDate: Date;
+    public originationAccount: string;
+    public lien: Lien;
+    public borrower: User
+    public status: string;
+    //constructor(){}
+    constructor(loanNumber: number, loanAmount: number, loanManagementFees: number, loanTerm: string, originationDate: Date, originationAccount: string, lien: Lien, borrower: User, status: string) {
+        this.loanNumber = loanNumber;
+        this.loanAmount = loanAmount;
+        this.loanManagementFees = loanManagementFees;
+        this.loanTerm = loanTerm;
+        this.originationDate = originationDate;
+        this.originationAccount = originationAccount;
+        this.lien = lien;
+        this.borrower = borrower;
+        this.status = status;
+    }
 }

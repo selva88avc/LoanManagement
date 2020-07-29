@@ -3,7 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
-
+import { LoanService } from '../services/loan.service';
+import { AlertService } from '../services/alert.service';
 @Component({ selector: 'app-login', templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
@@ -15,22 +16,22 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService
+        private authenticationService: AuthenticationService,
+        private loanService: LoanService,
+        private alertService: AlertService
     ) {
-      console.log("------------------------");
-      // redirect to home if already logged in
-         if (this.authenticationService.currentUserValue) {
-             console.log(this.route.snapshot.queryParams['returnUrl'])
-             this.router.navigate(['/']);
-         }
+        // redirect to home if already logged in
+        this.loanService.isLogin.emit(true);
+        if (this.authenticationService.currentUserValue) {
+            this.router.navigate(['/']);
+        }
     }
 
     ngOnInit() {
-        this.loginForm = this.formBuilder.group({
+       this.loginForm = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
-
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
@@ -55,11 +56,12 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 data => {
                     this.router.navigate([this.returnUrl]);
+                    this.authenticationService.isAdmin.emit(this.authenticationService.currentUserValue.role == "admin");
                 },
                 error => {
                     console.error("not authenticated");
-                    //this.alertService.error(error);
-                    //this.loading = false;
+                    this.alertService.error(error);
+                    this.loading = false;
                 });
     }
 }

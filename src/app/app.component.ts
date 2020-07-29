@@ -12,13 +12,13 @@ export class AppComponent {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService
-) {
-}
-// logout() {
-//   this.authenticationService.logout();
+  ) {
+  }
+  // logout() {
+  //   this.authenticationService.logout();
 
-// }
-// isAdmin(){
-//   this.authenticationService.currentUserValue.
-// }
+  // }
+  // isAdmin(){
+  //   this.authenticationService.currentUserValue.
+  // }
 }

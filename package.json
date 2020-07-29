@@ -11,9 +11,10 @@
   },
   "private": true,
   "dependencies": {
+    "-": "0.0.1",
     "@angular/animations": "~10.0.2",
     "@angular/cdk": "^10.0.2",
-    "@angular/common": "~10.0.2",
+    "@angular/common": "^10.0.4",
     "@angular/compiler": "~10.0.2",
     "@angular/core": "~10.0.2",
     "@angular/forms": "~10.0.2",
@@ -23,7 +24,9 @@
     "@angular/router": "~10.0.2",
     "bootstrap": "^3.4.1",
     "rxjs": "~6.5.5",
+    "save-dev": "0.0.1-security",
     "tslib": "^2.0.0",
+    "tslint-angular": "^3.0.2",
     "uuid": "^8.2.0",
     "zone.js": "~0.10.3"
   },

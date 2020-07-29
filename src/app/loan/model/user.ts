@@ -1,19 +1,23 @@
+import { Address } from "./address";
+
 export class User {
-    id: number;
-    username: string;
-    password: string;
+    userId: number;
+    userName: string;
+    passWord: string;
     firstName: string;
     lastName: string;
-    token: string;
-    role: string
-    
-    constructor (id: number, username: string, password: string, firstName: string, lastName: string, token: string, role: string){
-        this.id = id;
-        this.username = username;
-        this.password = password;
+    role: string;
+    email: string;
+    address: Address;
+
+    constructor(userId: number, userName: string, passWord: string, firstName: string, lastName: string, role: string, email: string, address: Address) {
+        this.userId = userId;
+        this.userName = userName;
+        this.passWord = passWord;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.token = token;
         this.role = role;
+        this.email = email;
+        this.address = address;
     }
 }

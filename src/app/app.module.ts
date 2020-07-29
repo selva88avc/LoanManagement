@@ -19,7 +19,9 @@ import { LoginComponent } from './login/login.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './home/home.component';
-
+import { AlertComponent } from './alert/alert.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UserComponent } from './user/user.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { HomeComponent } from './home/home.component';
     HeaderComponent,
     LoanListComponent,
     LoanItemComponent,
-    HomeComponent
+    HomeComponent,
+    AlertComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,7 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
-    MatSortModule, MatTableModule, BrowserAnimationsModule, MatDatepickerModule, MatNativeDateModule
+    MatSortModule, MatTableModule, BrowserAnimationsModule, MatDatepickerModule, MatNativeDateModule, HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

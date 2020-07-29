@@ -11,13 +11,13 @@
  */
 
 
-export class Lien { 
+export class Lien {
     public name: string;
     public creatTime: Date;
     public resourceType: string;
     public resourceValue: number;
 
-    constructor (name: string, creatTime: Date, resourceType: string, resourceValue: number){
+    constructor(name: string, creatTime: Date, resourceType: string, resourceValue: number) {
         this.name = name;
         this.creatTime = creatTime;
         this.resourceType = resourceType;

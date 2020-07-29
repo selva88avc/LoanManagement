@@ -1,0 +1,107 @@
+<div class="row">
+    <div class="col-md-10">
+       <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+               <div class="col-md-5">
+                   <div class="form-group">
+                       <label for="firstName" class="control-label">First Name</label>
+                       <input type="text" formControlName="firstName"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                       <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                           <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-md-5">
+                   <div class="form-group">
+                       <label for="lastName" class="control-label">Last Name</label>
+                       <input type="text" formControlName="lastName"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                       <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                           <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="userName" class="control-label">User Name</label>
+                        <input type="text" formControlName="userName"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" />
+                        <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                            <div *ngIf="f.userName.errors.required">User Name is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="passWord" class="control-label">Password</label>
+                        <input type="password" formControlName="passWord"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.passWord.errors }" />
+                        <div *ngIf="submitted && f.passWord.errors" class="invalid-feedback">
+                            <div *ngIf="f.passWord.errors.required">Password is required</div>
+                        </div>
+                    </div>
+                </div>
+           </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="address1" class="control-label">Address 1</label>
+                        <input type="text" formControlName="address1"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address1.errors }" />
+                        <div *ngIf="submitted && f.address1.errors" class="invalid-feedback">
+                            <div *ngIf="f.address1.errors.required">Address 1 is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="address2" class="control-label">Address 2</label>
+                        <input type="text" formControlName="address2"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address2.errors }" />
+                        <div *ngIf="submitted && f.address2.errors" class="invalid-feedback">
+                            <div *ngIf="f.address2.errors.required">Address 2 is required</div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="address3" class="control-label">Address 3</label>
+                        <input type="text" formControlName="address3"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address3.errors }" />
+                        <div *ngIf="submitted && f.address3.errors" class="invalid-feedback">
+                            <div *ngIf="f.address3.errors.required">Address 3 is required</div>
+                        </div>
+                    </div>
+                </div>
+               <div class="col-md-5">
+                   <div class="form-group">
+                       <label for="role">Role</label>
+                       <select class="custom-select form-control" formControlName="role" maxlength="100" [ngClass]="{ 'is-invalid': submitted && f.role.errors }" >
+                           <option value="" disabled>Choose Role</option>
+                           <option value="admin">ADMIN</option>
+                           <option value="normal">NORMAL</option>
+                        </select>
+                       <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                           <div *ngIf="f.role.errors.required">Role is required</div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="email" class="control-label">Email</label>
+                    <input type="text" formControlName="email"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                    </div>
+                </div>
+            </div>
+           </div>
+           <div class="form-group">
+               <button [disabled]="loading" class="btn btn-primary">
+                   <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                   Create User
+               </button>
+           </div>
+       </form>
+   </div>
+</div>

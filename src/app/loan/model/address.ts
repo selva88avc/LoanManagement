@@ -11,12 +11,12 @@
  */
 
 
-export class Address { 
+export class Address {
     public addressLine1: string;
     public addressLine2: string;
-    public addressline3?: string;
-    
-    constructor(addressLine1: string, addressLine2: string, addressLine3?: string){
+    public addressline3: string;
+
+    constructor(addressLine1: string, addressLine2: string, addressLine3: string) {
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.addressline3 = addressLine3;

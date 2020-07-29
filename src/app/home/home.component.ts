@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
+import { LoanService } from '../services/loan.service';
 
 @Component({
   selector: 'app-home',
@@ -8,19 +9,19 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class HomeComponent implements OnInit {
   isAdmin: boolean = false;
-  constructor(private authenticationService: AuthenticationService
-    ) {
-   
-    
+  constructor(private authenticationService: AuthenticationService, private loanService: LoanService
+  ) {
+    authenticationService.isAdmin.subscribe(
+      (isAdmin: boolean) => this.isAdmin = isAdmin);
+  }
+  checkAdmin() {
+    if (this.authenticationService.currentUserValue)
+      this.isAdmin = this.authenticationService.currentUserValue.role == "admin";
   }
   logout() {
     this.authenticationService.logout();
-  
   }
-  checkAdmin(){
-    if(this.authenticationService.currentUserValue)
-    this.isAdmin =  this.authenticationService.currentUserValue.role == "admin";
-  }
+
   ngOnInit(): void {
     this.checkAdmin();
   }

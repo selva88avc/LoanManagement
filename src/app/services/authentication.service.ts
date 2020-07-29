@@ -1,16 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 //import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 //import { map } from 'rxjs/operators';
 import { User } from '../loan/model/user';
-
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { mergeMap, map, catchError } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
-
-    //constructor(private http: HttpClient) {
-    constructor() {
+    isAdmin = new EventEmitter<boolean>();
+    constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -19,34 +20,27 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
+    handleError(error: any) {
+        let errorMessage = '';
+        if (error.error instanceof ErrorEvent) {
+            // client-side error
+            errorMessage = `Error: ${error.error.message}`;
+        } else {
+            // server-side error
+            errorMessage = `Message: ${error.error.reason}`;
+        }
+        return throwError(errorMessage);
+    }
+
     login(username, password): Observable<User> {
-        let user :User;
-        if(username == 'selva' && password == 'kumar'){
-            user = new User(1234, 'selva', 'kumar', 'selva', 'kumar', 'iuyiuyu-8809809', 'admin')
-            this.currentUserSubject.next(user);
-        }
-        if(username == 'muthu' && password == 'kumar'){
-            user = new User(1234, 'selva', 'kumar', 'selva', 'kumar', 'iuyiuyu-8809809', 'normal')
-            this.currentUserSubject.next(user);
-        }
-        return new Observable((observer) => {
-            if(user){
+        return this.http.get<User>(`${environment.userUrl}/users/search?username=${username}&password=${password}`)
+            .pipe(map(user => {
                 localStorage.setItem('currentUser', JSON.stringify(user));
-                observer.next(user);
-            } else {
-                observer.error("error");
-            }
-        });
-    }            
-        
-        // return this.http.post<any>(`${config.apiUrl}/users/authenticate`, { username, password })
-        //     .pipe(map(user => {
-        //         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        //         localStorage.setItem('currentUser', JSON.stringify(user));
-        //         this.currentUserSubject.next(user);
-        //         return user;
-        //     }));
-    
+                this.currentUserSubject.next(user);
+                return user;
+            }), catchError(val => this.handleError(val)));
+
+    }
 
     logout() {
         // remove user from local storage and set current user to null
