@@ -36,9 +36,9 @@ export class LoanDetailComponent implements OnInit {
     ngOnInit() {
         // this.loanService.isLogin.emit(false); 
         this.loanForm = this.formBuilder.group({
-            loanAmount: ['', Validators.required],
+            loanAmount: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
             loanTerm: ['', Validators.required],
-            loanManagementFees: ['', Validators.required],
+            loanManagementFees: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
             originationDate: ['', Validators.required],
             originationAccount: ['', Validators.required],
             status: ['', Validators.required],
@@ -70,7 +70,8 @@ export class LoanDetailComponent implements OnInit {
             return;
         }
         this.loading = true;
-        const loan = new Loan(null, this.f.loanAmount.value, this.f.loanManagementFees.value, this.f.loanTerm.value, new Date(this.f.originationDate.value), '21938072382128', new Lien('Vehicle Lien', new Date(), 'House', 10000), new User(this.f.userId.value, null, null, null, null, null, null, null), this.f.status.value);
+        console.log("User ID: " +this.f.userId.value)
+        const loan = new Loan(null, this.f.loanAmount.value, this.f.loanManagementFees.value, this.f.loanTerm.value, new Date(this.f.originationDate.value), '21938072382128', new Lien('Vehicle Lien', new Date(), 'House', 10000), this.f.userId.value, this.f.status.value);
         this.loanService.saveLoan(loan)
             .pipe(first())
             .subscribe(

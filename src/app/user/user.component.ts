@@ -40,8 +40,8 @@ export class UserComponent implements OnInit {
             address3: ['', Validators.required],
             role: ['', Validators.required],
             email: ['', Validators.required],
-            userName: ['', Validators.required],
-            passWord: ['', Validators.required]
+            username: ['', Validators.required],
+            password: ['', Validators.required]
         });
 
         // get return url from route parameters or default to '/'
@@ -59,13 +59,13 @@ export class UserComponent implements OnInit {
         // }
         this.loading = true;
         const address = new Address(this.f.address1.value, this.f.address2.value, this.f.address3.value);
-        const userName = this.f.userName.value;
-        const passWord = this.f.passWord.value;
+        const username = this.f.username.value;
+        const password = this.f.password.value;
         const firstName = this.f.firstName.value;
         const lastName = this.f.lastName.value;
         const role = this.f.role.value;
         const email = this.f.email.value;
-        const user = new User(null, userName, passWord, firstName, lastName, role, email, address);
+        const user = new User(null, username, password, firstName, lastName, role, email, address);
         this.userService.save(user)
             .pipe(first())
             .subscribe(

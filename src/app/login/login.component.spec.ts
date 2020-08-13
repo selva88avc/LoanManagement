@@ -13,6 +13,7 @@ import { of, BehaviorSubject, Observable } from 'rxjs';
 import { Loan } from '../loan/model/loan';
 import { EventEmitter, Output } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthResp } from '../loan/model/auth.resp';
 
 
 describe('LoginComponent', () => {
@@ -26,14 +27,14 @@ describe('LoginComponent', () => {
   let alertService: AlertService;
   const alertServiceSpy = jasmine.createSpyObj('AlertService', ['error', 'success']);
   class MockedAuthenticationService {
-    private currentUserSubject: BehaviorSubject<User>;
-    public currentUser: Observable<User>;
+    private currentUserSubject: BehaviorSubject<AuthResp>;
+    public currentUser: Observable<AuthResp>;
     isAdmin= new EventEmitter<boolean>();
-    public get currentUserValue(): User {
-        return new User(1234, 'selva', 'kumar', 'selva', 'kumar', 'admin');
+    public get currentUserValue(): AuthResp {
+        return new AuthResp();
     }
-    login(username, password): Observable<User> {
-        return of(new User(1234, 'selva', 'kumar', 'selva', 'kumar', 'admin'))
+    login(username, password): Observable<AuthResp> {
+        return of(new AuthResp())
     }
     logout() {       
     }
@@ -46,7 +47,7 @@ class MockedLoanService {
 }
   const authenticationServiceStub = {
   login(username, password) {
-    return of( new User(1234, 'selva', 'kumar', 'selva', 'kumar', 'admin') )
+    return of( new AuthResp() )
     }
   }
   const loanServiceStub = {    

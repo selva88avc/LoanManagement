@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
+                    this.loanService.isLoggedin.emit(true);
                     this.router.navigate([this.returnUrl]);
                     this.authenticationService.isAdmin.emit(this.authenticationService.currentUserValue.role == "admin");
                 },

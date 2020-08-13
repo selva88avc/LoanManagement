@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
       this.isAdmin = this.authenticationService.currentUserValue.role == "admin";
   }
   logout() {
+    this.loanService.isLoggedin.emit(true);
     this.authenticationService.logout();
   }
 

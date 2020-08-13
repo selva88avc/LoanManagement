@@ -21,10 +21,11 @@ export class Loan {
     public originationDate: Date;
     public originationAccount: string;
     public lien: Lien;
-    public borrower: User
+    public borrower: User;
+    public userId: number;
     public status: string;
     //constructor(){}
-    constructor(loanNumber: number, loanAmount: number, loanManagementFees: number, loanTerm: string, originationDate: Date, originationAccount: string, lien: Lien, borrower: User, status: string) {
+    constructor(loanNumber: number, loanAmount: number, loanManagementFees: number, loanTerm: string, originationDate: Date, originationAccount: string, lien: Lien, userId: number, status: string) {
         this.loanNumber = loanNumber;
         this.loanAmount = loanAmount;
         this.loanManagementFees = loanManagementFees;
@@ -32,7 +33,7 @@ export class Loan {
         this.originationDate = originationDate;
         this.originationAccount = originationAccount;
         this.lien = lien;
-        this.borrower = borrower;
+        this.userId = userId;
         this.status = status;
     }
 }

@@ -26,6 +26,7 @@
                     <input type="text" formControlName="loanAmount" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && f.loanAmount.errors }" />
                     <div *ngIf="submitted && f.loanAmount.errors" class="invalid-feedback">
+                        <div *ngIf="f.loanAmount.errors.pattern">Number Only</div>
                         <div *ngIf="f.loanAmount.errors.required">Loan Amount is required</div>
                     </div>
                 </div>
@@ -52,6 +53,7 @@
                     <input type="text" formControlName="loanManagementFees" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && f.loanManagementFees.errors }" />
                     <div *ngIf="submitted && f.loanManagementFees.errors" class="invalid-feedback">
+                        <div *ngIf="f.loanManagementFees.errors.pattern">Number Only</div>
                         <div *ngIf="f.loanManagementFees.errors.required">Loan Management Fees is required</div>
                     </div>
                 </div>

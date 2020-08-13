@@ -10,14 +10,16 @@ import { Address, Lien } from '../loan/model/models';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map, catchError } from 'rxjs/operators';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({ providedIn: 'root' })
 export class LoanService {
     loanToBeEdited = new EventEmitter<Loan>();
     isUpdated = new EventEmitter<boolean>();
     isLogin = new EventEmitter<boolean>();
+    isLoggedin = new EventEmitter<boolean>();
     isAdmin = new EventEmitter<boolean>();
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
 
     }
 
@@ -49,7 +51,12 @@ export class LoanService {
     }
 
     getLoans(): Observable<Loan[]> {
-        return this.http.get<Loan[]>(`${environment.loanUrl}/loans`)
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'User-Authorization': this.authenticationService.currentUserValue.jwttoken
+            })
+        };
+        return this.http.get<Loan[]>(`${environment.loanUrl}/loans`, httpOptions)
             .pipe(map(loans => {
                 return loans;
             }), catchError(val => this.handleError(val)));
@@ -59,9 +66,9 @@ export class LoanService {
         return Math.floor(Math.random() * (99999999999 - 10000000000 + 1) + 10000000000);
     }
     // remove() {
-        // GlobalConstant.loans.r
-        // remove user from local storage and set current user to null
-        // localStorage.removeItem('currentUser');
-        // this.currentUserSubject.next(null);
+    // GlobalConstant.loans.r
+    // remove user from local storage and set current user to null
+    // localStorage.removeItem('currentUser');
+    // this.currentUserSubject.next(null);
     // }
 }

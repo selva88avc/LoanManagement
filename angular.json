@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "LoanManagement"
+  "defaultProject": "LoanManagement",
+  "cli": {
+    "analytics": "62837de2-7d02-4b46-8d3f-e2476a23e404"
+  }
 }
